@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue入门</title>
+	<script src="./vue.js"></script><!--使用script标签引入vue.js-->
+</head>
+<body>
+	<!--该div标签为实例Vue的挂载点 标签中的内容为模板，模板还可以写在实例中的template属性中 -->
+	<div id="root">
+		This is {{msg}}
+		<div v-text=test></div>		<!-- 不会转义模板 test中的标签 -->
+		<div v-html=test></div>		<!-- 会转义模板 test中的标签 -->
+		<div v-on:click="shijianClick">{{content}}</div>			<!-- v-on:触发事件 -->
+		<div @click="newClick">{{content1}}</div>
+
+		<div v-bind:title="tit">Hello web</div>					<!-- v-bind: 绑定数据 -->
+		<input v-model="num"/>									<!-- 双向数据绑定 更改输入框中的数据可直接更改原数据 -->
+		<div>{{num}}</div>
+
+		<input v-model="firstName"/>				<!--双向绑定-->
+		<input v-model="lastName"/>
+		<div>{{fullName}}</div>						<!--fullName计算属性 通过别的属性计算出来-->
+		<div>{{count}}</div>						<!--count侦听属性 通过侦听其他属性发生变化实现逻辑-->
+
+		<div v-if="now">Hello Amerabs</div>			<!--v-if为false时 含有该参数的标签会被移除   v-show则会更改标签的disolay属性为none，达到隐藏的效果 -->
+		<button v-on:click="handleClice">变toggle变</button>
+		<ul>
+			<li v-for="(item,index) of list" v-bind:key="index">{{item}}</li>	<!-- v-for循环输出列表值   key属性会提升性能(key不能重复)-->
+			<!-- v-for 中 循环遍历list每项到item中  index为每一项的下标 -->
+		</ul>
+	</div>
+	<!--下面的script标签使用vue.js的库创建一个实例 Vue 而el所对应的标签为这个实例的挂载点-->
+	<script>
+		new Vue({
+			el:"#root",		
+			data:{			
+				msg:"Hello world",
+				test:"<h4>使用v-text与v-html标签指令</h4>",
+				num: "9527",
+				tit: "this is test",
+				content:"惶恐滩头说惶恐",
+				content1:"伶仃洋里叹伶仃",
+			
+				firstName: "",
+				lastName: "",
+				count: 0,
+
+				now:true,
+				list:[1, 2, 3]
+			},
+			methods:{
+				shijianClick:function(){
+					alert("123")
+					this.content = "人生自古谁无死"
+				},
+				
+				newClick:function(){
+					this.content1="留取丹心照汉青"
+				},
+
+				handleClice:function(){
+					this.now=!this.now;
+				}
+			},
+			computed:{
+				fullName:function(){
+					return this.firstName+'	'+this.lastName;
+				}
+			},
+			watch:{
+				fullName:function(){
+					this.count++
+				}
+			}
+		})
+	</script>
+</body>
+</html>
+

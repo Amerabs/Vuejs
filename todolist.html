@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>TodoList test</title>
+        <script src="./vue.js"></script>
+    </head>
+    <body>
+        <!-- vue注重对数据的操作 -->
+        <!-- 实例也是组件 它的模板 template 即挂载点中的内容 一个vue页面中由组件构成-->
+        <!-- 父组件通过属性传递数据给子组件,子组件通过广播分发携带数据给父组件(需要父组件监听子组件事件) -->
+        <!-- v-model 双向绑定数据，可改变源数据。 'v-on:' 等同于 '@' ,'v-bind': 等同于 ':' -->
+        <!-- 组件标签名自定义， $emit 广播事件名称自定义-->
+        <div id="root">
+            <div>
+                <input v-model="inputValue"/>
+                <button v-on:click="handleSubmit">提交</button>
+            </div>
+
+            <!-- 组件：页面的某一部分 方便维护  组件也算是实例 实例也算组件 -->
+            <ul>
+                <todo-m 
+                    v-for="(item , index) of list" 
+                    :key="index" 
+                    :suiyi="item"
+                    :index="index"
+                    v-on:xiangwai="handleDelete"
+                ></todo-m>      <!-- 参数 “suiyi , index” 是通过属性传递数据给子组件  而 "xiangwai" 是自定义的监听子空间的属性名称-->
+                <todo></todo>
+            </ul>
+        </div>
+
+        <script>
+            //注册全局组件“todo-m” 
+            Vue.component("todo-m",{
+                props:["suiyi","index"],            //获取与list的item绑定的对象 suiyi(属性名称自起的) 在组件中可使用
+                template:"<li v-on:click='handleClick'>全局模板  {{suiyi}}</li>" ,   //组件使用的模板
+                methods:{
+                    handleClick:function(){
+                        this.$emit('xiangwai',this.index)       //使用 $emit 触发事件 将事件向外部发布并传递数据值 当父组件监听时便可以获取数据
+                    }
+                }
+            })
+
+            //注册局部组件“todoitem” 使用时需要在挂载对象的 components 中 声明组件
+            var todoitem = {
+                template:"<li v-on:click='handleClick'>局部模板</li>",
+                methods:{
+                    
+                }
+            }
+
+            //创建Vue对象  Vue中包含有 todo-m 的组件 即Vue为todo-m的父组件
+            new Vue({
+                el:"#root",
+                components:{
+                    "todo":todoitem      //局部组件的声明
+                },
+                data:{
+                    inputValue:"",
+                    list:[]
+                },
+                methods:{
+                    handleSubmit:function(){
+                        this.list.push(this.inputValue)     //将input输入的内容传如数组
+                        this.inputValue = " "   
+                    },
+                    handleDelete:function(index){
+                        this.list.splice(index,1)               //从下标出删除1个值
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+https://blog.csdn.net/wenmin1987/article/details/82108008
+
+1.初始化：vue init webpack my-project
+2.根据提示构建项目
+3.进入工程目录：cd my-project
+4.启动服务：npm run dev
+
+
+打包测试版本：npm run build
+打包正式版本：npm run release
+
+打包好的文件分别放在dist/release中
