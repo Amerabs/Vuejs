@@ -1,0 +1,45 @@
+一个完整的标签就是一个元素，即元素=开始标签+内容+结束标签
+
+块级标签 与 内联标签，块级标签 中嵌套 内联标签。
+
+< = &lt;
+> = &gt;
+" = &quot;
+' = &apos;
+& = &amp;
+
+<!DOCTYPE html>是最短的有效的文档声明
+
+<html>根标签  <head>不在页面展示的数据 <body>页面展示部分
+
+<html lang = "en-US">
+
+在<head>中：
+	<link ref="" href="" type="image/x-ico">  插入网站小图标
+	<meta>描述数据 <meta charset="utf-8"> <meta name="author" content="作者">
+	添加css与JS(js放在/body标签之前也行)
+	
+	
+<p>段落标签 <em>字体斜体 <strong> 字体加粗  <span>字段标签无作为
+
+<i>斜体  <b>粗体  <u>下划线  <a href="地址" title="鼠标悬停介绍">超链接
+
+url地址： 同级文件直接使用文件名 子级文件使用文件夹/文件名  上级文件使用 ../文件名(..返回上一级)
+
+<dl> 描述列表<dd>描述项<dt>描述内容 (description list 描述标签)  
+
+<q>  行内引用  <blockquote> 块级引用  其中cite属性内容不显示 <cite>标签会显示
+
+<abbr title="">标签  标记缩写词并说明解释
+
+<address> 联系方式块
+
+<sub>  上标(如平方根的角标)  <sup>下标
+
+<code>展示代码  <pre>保留空格 <var>声明变量 <kbd>标记键盘录入 <samp>标记程序输出
+
+<time datatime="">标记时间
+
+<header>页眉  <nav>导航栏 <main>主体内容 <aside>侧边栏 <footer>页脚
+
+<br>换行  <hr>分割线
